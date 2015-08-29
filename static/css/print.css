@@ -1,0 +1,10 @@
+.jumbotron { display: none; }
+.breadcrumb { display: none; }
+.dropdown { display: none; }
+
+
+/* Bootstrap druckt die URLs in Klammern hinter die Links.
+   Das wird folgendermaßen verhindert */
+a[href]:after {
+    content: none !important;
+  }

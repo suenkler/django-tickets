@@ -1,0 +1,25 @@
+# compiled python files
+*.py[cod]
+ 
+# emacs temp files
+*~
+[#]*[#]
+.\#*
+
+# pycharm settings
+.idea/
+
+# sphinx build folder
+doc/_build
+
+# OS generated files
+.DS_Store?
+
+# no media files in repo
+media/
+
+# database not in repo
+db.sqlite3
+
+# bash script to set environment variables
+env.sh

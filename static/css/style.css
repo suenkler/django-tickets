@@ -1,0 +1,73 @@
+
+body { padding-top: 50px; }
+
+#title { font-size: 35px; }
+
+#header_icon { float: left; padding: 20px; }
+#header_subtitle { color: #737373; }
+
+.jumbotron h1 {font-size: 45px; }
+
+
+
+/* Anpassungen des Standard Bootstrap CSS */
+
+
+/* Größe und Ausrichtung der Überschriften */
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 24px 0px 20px;
+    border-bottom: 1px solid #EEE;
+}
+
+.page-header h1 { font-size: 32px; }
+/* ========================= */
+
+h2 { font-size: 25px; }
+
+
+.hs-infobox {
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #EEE;
+    border-color: #DDD;
+    border-width: 1px;
+    border-radius: 4px 4px 0px 0px;
+    box-shadow: none;
+    position: relative;
+    padding: 10px 10px 10px;
+    border-style: solid;
+}
+
+.hs-infobox-title { color: #959595;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.hs-infobox ul { list-style-type: square; padding-left: 25px; }
+
+.hs-infobox ul > li {
+    color: #9f9f9f;
+}
+
+.hs-infobox ul > li > span {
+    color: black;
+}
+
+.hs-generate-button { float: right; margin-top: 20px; }
+
+/* Bearbeiten-Links in der Fragebogen-Übersicht */
+
+.hs-edit-link { font-size: 16px; }
+.hs-edit-link:hover { color: grey; }
+
+
+.navbar .fa { font-size: 18px; }
+
+

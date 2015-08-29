@@ -1,0 +1,32 @@
+{% extends "main/base.html" %}
+
+{% block title %}Tickets - Settings{% endblock %}
+
+{% block header_icon %}<i class="fa fa-cogs fa-5x"></i>{% endblock %}
+{% block headline %}Settings{% endblock %}
+{% block head-message %}Please adjust your settings{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+
+<div class="row" style="margin-top: 30px;">
+    <div class="col-md-6">
+
+        {% load crispy_forms_tags %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+
+            {{ form_user|crispy }}
+      <br/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="submit" value="Save Settings" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+
+{% endblock %}

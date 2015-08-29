@@ -1,0 +1,113 @@
+{% extends "main/base.html" %}
+
+{% block header_icon %}<i class="fa fa-pencil-square-o fa-5x"></i>{% endblock %}
+{% block headline %}Ticket #{{ticket.id}}{% endblock %}
+{% block head-message %}Everything you need to know about this ticket{% endblock %}
+
+{% block title %}Tickets - Details of ticket #{{ ticket.id }}{% endblock %}
+
+{% block content %}
+
+<div class="dropdown" style="float: right; margin-top: -50px; margin-right: 20px;">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    Actions
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'ticket_edit' pk=ticket.id %}" id="edit_ticket">Edit ticket</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'attachment_new' %}?ticket={{ ticket.id }}" id="add_attachment">Add attachment</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'followup_new' %}?ticket={{ ticket.id }}" id="add-followup">Add followup</a></li>
+  </ul>
+</div>
+
+      <div class="page-header"><h1>Ticket #{{ ticket.id }}</h1></div>
+
+<div class="row">
+    <div class="col-lg-8">
+
+      <style>
+       .description { background: #EEE; }
+      </style>
+
+<table class="table table-bordered">
+  <tr>
+    <td class="description"><b>Status</b></td>
+    <td>{% if ticket.status == "TODO" %}<span class="label label-danger">TODO</span>{% elif ticket.status == "DONE" %}<span class="label label-success">DONE</span>{% elif ticket.status == "WAITING" %}<span class="label label-warning">WAITING</span>{% elif ticket.status == "IN PROGRESS" %}<span class="label label-default">IN PROGRESS</span>{% endif %}</td>
+  </tr>
+  <tr>
+    <td class="description"><b>Assigned to</b></td>
+    <td>{% if ticket.assigned_to %}{{ ticket.assigned_to.first_name }} {{ ticket.assigned_to.last_name }}{% else %}---{% endif %}</td>
+  </tr>
+  <tr>
+    <td class="description"><b>Owner</b></td>
+    <td>{{ ticket.owner.first_name }} {{ ticket.owner.last_name }}</td>
+  </tr>
+  <tr>
+    <td width="180px" class="description"><b>Title</b></td>
+    <td>{{ ticket.title }}</td>
+  </tr>
+  <tr>
+    <td class="description"><b>Description</b></td>
+    <td>{{ ticket.description}}</td>
+  </tr>
+</table>
+
+    </div>
+    <div class="col-lg-4">
+
+{% if attachments %}
+<h2>Attachments</h2>
+<ul>
+    {% for attachment in attachments %}
+    <li><a href="/media/tickets/{{ ticket.id }}/{{ attachment.filename }}">{{ attachment.filename }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+    </div><!-- Ende column -->
+</div><!-- Ende row -->
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
+
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        $('#followups').dataTable();
+    } );
+</script>
+
+<h2>Followups</h2>
+{% if followups %}
+<table id="followups" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th width="10px"></th>
+        <th width="150px">User</th>
+        <th>Text</th>
+        <th width="100px">Modified</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for followup in followups %}
+    <tr>
+      <td>
+          <a href="{% url 'followup_edit' pk=followup.id %}"><i class="fa fa-pencil-square-o"></i></a>
+      </td>
+      <td>{{ followup.user.first_name }} {{ followup.user.last_name }}</td>
+      <td>{{ followup.text }}</td>
+      <td>{{ followup.modified|date:"d.m.Y, G:i" }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+    <p>no followup so far...</p>
+{% endif %}
+
+
+{% endblock %}
+

@@ -1,0 +1,33 @@
+{% extends "main/base.html" %}
+
+{% block title %}Tickets - Edit followup{% endblock %}
+
+{% block header_icon %}<i class="fa fa-pencil-square-o fa-5x"></i>{% endblock %}
+{% block headline %}{% if 'edit' in request.path %}Edit Followup{% else %}Create new Followup{% endif %}{% endblock %}
+{% block head-message %}Please fill out the form{% endblock %}
+
+{% block content %}
+
+    {% load crispy_forms_tags %}
+
+{% if 'edit' in request.path %}
+
+    <div class="page-header"><h1>Edit Followup</h1></div>
+
+    <form action="#" method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input class="btn btn-primary" type="submit" value="Save Followup" />
+    </form>
+{% else %}
+    <div class="page-header"><h1>Create a new Followup</h1></div>
+
+    <form action="/followup/new/" method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input class="btn btn-primary" type="submit" value="Create new Followup" />
+    </form>
+{% endif %}
+
+{% endblock %}
+

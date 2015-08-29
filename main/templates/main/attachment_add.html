@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+
+{% block title %}Tickets - Add attachment{% endblock %}
+
+{% block header_icon %}<i class="fa fa-pencil-square-o fa-5x"></i>{% endblock %}
+{% block headline %}Add Attachment{% endblock %}
+{% block head-message %}Please fill out the form{% endblock %}
+
+{% block content %}
+
+    {% load crispy_forms_tags %}
+
+    <div class="page-header"><h1>Add Attachment</h1></div>
+
+    <form enctype="multipart/form-data" method="post" action="">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input class="btn btn-primary" type="submit" value="Save Attachment" />
+    </form>
+
+{% endblock %}
+
