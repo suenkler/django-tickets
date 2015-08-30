@@ -30,6 +30,9 @@ Sensitive and installation dependent information is expected in environment vari
 export DJANGO_SECRET_KEY="xxx"
 export DJANGO_PRODUCTION_DOMAIN="xxx"
 
+# log file
+export DJANGO_LOG_FILE="xxx"
+
 # static and media files dir in production
 export DJANGO_STATIC_ROOT="xxx"
 export DJANGO_MEDIA_ROOT="xxx"

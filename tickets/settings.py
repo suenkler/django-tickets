@@ -124,7 +124,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '../logs/django-tickets.log',
+            'filename': os.environ["DJANGO_LOG_FILE"],
             'formatter': 'verbose'
         },
         'mail_admins': {
