@@ -33,7 +33,7 @@ export DJANGO_PRODUCTION_DOMAIN="xxx"
 # log file
 export DJANGO_LOG_FILE="xxx"
 
-# static and media files dir in production
+# static and media files directories in production
 export DJANGO_STATIC_ROOT="xxx"
 export DJANGO_MEDIA_ROOT="xxx"
 
