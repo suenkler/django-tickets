@@ -18,11 +18,12 @@ class TicketCreateForm(forms.ModelForm):
         model = Ticket
         fields = ('title', 'description')
 
-        
+
 class TicketEditForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        fields = ('title', 'owner', 'description', 'status', 'waiting_for', 'assigned_to')
+        fields = ('title', 'owner', 'description',
+                  'status', 'waiting_for', 'assigned_to')
 
 
 class FollowupForm(forms.ModelForm):

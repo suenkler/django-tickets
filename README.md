@@ -34,7 +34,7 @@ export DJANGO_PRODUCTION_DOMAIN="xxx"
 export DJANGO_LOG_FILE="xxx"
 
 # static and media files dir in production
-export DJANGO_STATIC_ROOT="xxx"
+export DJANGO_STATIC_ROOT="static_root/"
 export DJANGO_MEDIA_ROOT="xxx"
 
 # User who gets django's email notifications (ADMINS/MANAGERS), see settings.py
@@ -56,7 +56,7 @@ export DJANGO_TICKET_EMAIL_NOTIFICATIONS_FROM="xxx"
 export DJANGO_TICKET_EMAIL_NOTIFICATIONS_TO="xxx"
 ```
 
-Please note that `django-tickets` is **not** packaged as a reusable django app; it's a **complete django project**. So just clone the repository and install the dependencies via pip and the application including user authentication is ready to go. 
+Please note that `django-tickets` is **not** packaged as a reusable django app; it's a **complete django project**. So just clone the repository and install the dependencies via pip and the application including user authentication is ready to go.
 
 ```
 $ git clone https://github.com/suenkler/django-tickets.git

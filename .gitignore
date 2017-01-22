@@ -1,6 +1,6 @@
 # compiled python files
 *.py[cod]
- 
+
 # emacs temp files
 *~
 [#]*[#]
@@ -23,3 +23,6 @@ db.sqlite3
 
 # bash script to set environment variables
 env.sh
+
+# static root folder for local deployments
+static_root
