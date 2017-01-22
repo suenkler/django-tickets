@@ -64,6 +64,7 @@ $ cd django-tickets
 $ pip install -r requirements.txt
 $ source env.sh
 $ ./manage.py migrate
+$ ./manage.py collectstatic
 $ ./manage.py createsuperuser
 $ ./manage.py runserver
 ```
