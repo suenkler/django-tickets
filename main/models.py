@@ -22,8 +22,13 @@ User.__unicode__ = user_unicode
 class Ticket(models.Model):
 
     title = models.CharField('Title', max_length=255)
-    owner = models.ForeignKey(User, related_name='owner', blank=True,
-                              null=True, verbose_name='Owner', )
+
+    owner = models.ForeignKey(User,
+                              related_name='owner',
+                              blank=True,
+                              null=True,
+                              verbose_name='Owner')
+
     description = models.TextField('Description', blank=True, null=True)
 
     STATUS_CHOICES = (
@@ -32,12 +37,17 @@ class Ticket(models.Model):
         ('WAITING', 'WAITING'),
         ('DONE', 'DONE'),
     )
-    status = models.CharField('Status', choices=STATUS_CHOICES, max_length=255,
-                              blank=True, null=True)
+    status = models.CharField('Status',
+                              choices=STATUS_CHOICES,
+                              max_length=255,
+                              blank=True,
+                              null=True)
 
-    waiting_for = models.ForeignKey(User, related_name='waiting_for',
-                                    blank=True, null=True,
-                                    verbose_name='Waiting For', )
+    waiting_for = models.ForeignKey(User,
+                                    related_name='waiting_for',
+                                    blank=True,
+                                    null=True,
+                                    verbose_name='Waiting For')
 
     # set in view when status changed to "DONE"
     closed_date = models.DateTimeField(blank=True, null=True)
@@ -46,7 +56,7 @@ class Ticket(models.Model):
                                     related_name='assigned_to',
                                     blank=True,
                                     null=True,
-                                    verbose_name='Assigned to',)
+                                    verbose_name='Assigned to')
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -59,11 +69,11 @@ class FollowUp(models.Model):
     """
     A FollowUp is a comment to a ticket.
     """
-    ticket = models.ForeignKey(Ticket, verbose_name='Ticket',)
+    ticket = models.ForeignKey(Ticket, verbose_name='Ticket')
     date = models.DateTimeField('Date', default=timezone.now)
     title = models.CharField('Title', max_length=200,)
     text = models.TextField('Text', blank=True, null=True,)
-    user = models.ForeignKey(User, blank=True, null=True, verbose_name='User',)
+    user = models.ForeignKey(User, blank=True, null=True, verbose_name='User')
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -90,11 +100,19 @@ def attachment_path(instance, filename):
 
 
 class Attachment(models.Model):
-    ticket = models.ForeignKey(Ticket, verbose_name='Ticket',)
-    file = models.FileField('File', upload_to=attachment_path,
-                            max_length=1000,)
-    filename = models.CharField('Filename', max_length=1000,)
-    user = models.ForeignKey(User, blank=True, null=True, verbose_name='User',)
+    ticket = models.ForeignKey(Ticket, verbose_name='Ticket')
+
+    file = models.FileField('File',
+                            upload_to=attachment_path,
+                            max_length=1000)
+
+    filename = models.CharField('Filename', max_length=1000)
+
+    user = models.ForeignKey(User,
+                             blank=True,
+                             null=True,
+                             verbose_name='User')
+
     created = models.DateTimeField(auto_now_add=True)
 
     def get_upload_to(self, field_attname):
