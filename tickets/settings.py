@@ -3,6 +3,8 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import socket
+# request.path in templates:
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -32,8 +34,6 @@ INSTALLED_APPS = (
     'main',
 )
 
-# request.path in templates:
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
 )
@@ -96,11 +96,13 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 # Define who gets code error notifications.
 # When DEBUG=False and a view raises an exception,
 # Django will email these people with the full exception information.
-ADMINS = ((os.environ["DJANGO_ADMIN_NAME"], os.environ["DJANGO_ADMIN_EMAIL"]), )
+ADMINS = ((os.environ["DJANGO_ADMIN_NAME"],
+           os.environ["DJANGO_ADMIN_EMAIL"]), )
 
 # Specifies who should get broken link notifications when
 # BrokenLinkEmailsMiddleware is enabled.
-MANAGERS = ((os.environ["DJANGO_ADMIN_NAME"], os.environ["DJANGO_ADMIN_EMAIL"]), )
+MANAGERS = ((os.environ["DJANGO_ADMIN_NAME"],
+             os.environ["DJANGO_ADMIN_EMAIL"]), )
 
 # Email delivery to local Postfix-Installation
 EMAIL_HOST = os.environ["DJANGO_EMAIL_HOST"]
@@ -113,7 +115,8 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'format': "[%(asctime)s] %(levelname)s \
+                       [%(name)s:%(lineno)s] %(message)s",
             'datefmt': "%d/%b/%Y %H:%M:%S"
         },
         'simple': {

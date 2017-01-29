@@ -9,7 +9,8 @@ from django.core.mail import send_mail
 
 from .models import Ticket, Attachment, FollowUp
 from .forms import UserSettingsForm
-from .forms import TicketCreateForm, TicketEditForm, FollowupForm, AttachmentForm
+from .forms import TicketCreateForm, TicketEditForm, \
+                   FollowupForm, AttachmentForm
 
 # Logging
 import logging
@@ -30,13 +31,14 @@ def inbox_view(request):
 
 def my_tickets_view(request):
 
-    tickets = Ticket.objects.filter(assigned_to=request.user).exclude(status__exact="DONE")
-    tickets_waiting = Ticket.objects.filter(waiting_for=request.user).filter(status__exact="WAITING")
+    tickets = Ticket.objects.filter(assigned_to=request.user) \
+                    .exclude(status__exact="DONE")
+    tickets_waiting = Ticket.objects.filter(waiting_for=request.user) \
+                                    .filter(status__exact="WAITING")
 
-    
     return render_to_response('main/my-tickets.html',
                               {"tickets": tickets,
-                               "tickets_waiting": tickets_waiting },
+                               "tickets_waiting": tickets_waiting},
                               context_instance=RequestContext(request))
 
 
@@ -81,7 +83,7 @@ def usersettings_update_view(request):
     else:
         form_user = UserSettingsForm(instance=user)
 
-    return render(request, 'main/settings.html', {'form_user': form_user,})
+    return render(request, 'main/settings.html', {'form_user': form_user, })
 
 
 def ticket_create_view(request):
@@ -156,15 +158,15 @@ def followup_create_view(request):
             ticket = Ticket.objects.get(id=request.POST['ticket'])
             # mail notification to owner of ticket
             notification_subject = "[#" + str(ticket.id) + "] New followup"
-            notification_body = "Hi,\n\na new followup was created for ticket #" \
+            notification_body = "Hi,\n\n new followup created for ticket #" \
                                 + str(ticket.id) \
                                 + " (http://localhost:8000/ticket/" \
                                 + str(ticket.id) \
                                 + "/)\n\nTitle: " + form.data['title'] \
                                 + "\n\n" + form.data['text']
 
-            send_mail(notification_subject, notification_body, 'test@suenkler.info',
-                            [ticket.owner.email], fail_silently=False)
+            send_mail(notification_subject, notification_body, 'test@test.tld',
+                      [ticket.owner.email], fail_silently=False)
 
             return redirect('inbox')
 
@@ -207,8 +209,8 @@ def attachment_create_view(request):
                 file=request.FILES['file'],
                 filename=request.FILES['file'].name,
                 user=request.user
-                #mime_type=form.file.get_content_type(),
-                #size=len(form.file),
+                # mime_type=form.file.get_content_type(),
+                # size=len(form.file),
             )
             attachment.save()
 
